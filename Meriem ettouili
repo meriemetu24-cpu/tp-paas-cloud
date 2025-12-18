@@ -1,0 +1,72 @@
+from flask import Flask
+import socket
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    hostname = socket.gethostname()
+    return f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Application PaaS</title>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+            }}
+            .container {{
+                background: rgba(255, 255, 255, 0.1);
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }}
+            h1 {{ color: #fff; }}
+            .info {{ 
+                background: rgba(255, 255, 255, 0.2);
+                padding: 15px;
+                border-radius: 5px;
+                margin: 15px 0;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🚀 Bienvenue sur mon application PaaS !</h1>
+            <div class="info">
+                <p><strong>Créé par :</strong> [VOTRE NOM]</p>
+                <p><strong>Modèle :</strong> PaaS avec Render.com</p>
+                <p><strong>Hostname :</strong> {hostname}</p>
+                <p><strong>Langage :</strong> Python + Flask</p>
+            </div>
+            <div class="info">
+                <h2>Ce que je N'AI PAS eu à faire :</h2>
+                <ul>
+                    <li>❌ Créer une machine virtuelle</li>
+                    <li>❌ Installer un système d'exploitation</li>
+                    <li>❌ Configurer un serveur web</li>
+                    <li>❌ Installer Python</li>
+                    <li>❌ Gérer le scaling</li>
+                    <li>❌ Gérer les certificats SSL</li>
+                </ul>
+                <h2>Ce que j'AI fait :</h2>
+                <ul>
+                    <li>✅ Écrire le code de l'application</li>
+                    <li>✅ Cliquer sur "Deploy"</li>
+                    <li>✅ C'est tout ! 🎉</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    </html>
+    '''
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
